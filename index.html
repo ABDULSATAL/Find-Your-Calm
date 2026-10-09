@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f5f6ef">
+<title>Find Your Calm | Your Wellness Space</title>
+
+<style>
+:root {
+  --bg: #f5f6ef;
+  --surface: #ffffff;
+  --green: #426b55;
+  --green-dark: #294c3a;
+  --green-light: #e4eee3;
+  --text: #29392f;
+  --muted: #718076;
+  --border: #e4e9e0;
+  --gold: #d8b66c;
+  --radius: 20px;
+  --shadow: 0 8px 28px rgba(41, 76, 58, 0.07);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+}
+
+button, input, textarea { font: inherit; }
+
+button { cursor: pointer; }
+
+button:focus-visible, input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+header {
+  background: linear-gradient(135deg, #e5eee0, #f5f0df);
+  padding: 22px 20px 28px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+header h1 {
+  margin: 8px 0 3px;
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+
+header p {
+  margin: 4px 0;
+  color: #617264;
+}
+
+main {
+  width: min(100% - 32px, 900px);
+  margin: 24px auto 50px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+nav button {
+  padding: 10px 15px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  transition: background .2s, color .2s;
+}
+
+nav button:hover { background: var(--green-light); }
+
+nav button.active {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+.page[hidden] { display: none; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(18px, 4vw, 28px);
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  background: var(--green-dark);
+  color: white;
+  padding: clamp(24px, 5vw, 42px);
+  border-radius: 26px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "☘";
+  position: absolute;
+  right: 12px;
+  bottom: -52px;
+  font-size: 170px;
+  opacity: .09;
+  pointer-events: none;
+}
+
+.hero > * { position: relative; z-index: 1; }
+
+.eyebrow {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.hero .eyebrow { color: #d9e8d7; }
+
+h2, h3 { line-height: 1.3; }
+
+h2 {
+  font-family: Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(24px, 4vw, 32px);
+  margin: 6px 0 12px;
+}
+
+h3 { margin: 0 0 8px; font-size: 19px; }
+
+p { margin-top: 8px; }
+
+.muted, .small { color: var(--muted); }
+.small { font-size: 13px; }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  background: var(--green);
+  color: white;
+  font-weight: 700;
+  transition: transform .15s, background .15s;
+}
+
+.button:hover {
+  background: var(--green-dark);
+  transform: translateY(-1px);
+}
+
+.button-light {
+  background: white;
+  color: var(--green-dark);
+}
+
+.button-light:hover {
+  background: var(--green-light);
+  color: var(--green-dark);
+}
+
+.button-outline {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--border);
+}
+
+.button-outline:hover {
+  background: var(--green-light);
+  color: var(--green-dark);
+}
+
+.button-danger {
+  background: #a34242;
+}
+
+.button-danger:hover { background: #823333; }
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: var(--radius);
+}
+
+.stat strong {
+  display: block;
+  font-size: 27px;
+  color: var(--green);
+}
+
+.stat span { font-size: 13px; color: var(--muted); }
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #e9eee6;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0 7px;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--green);
+  border-radius: inherit;
+  transition: width .3s;
+}
+
+.quote {
+  border-left: 4px solid var(--gold);
+  padding: 10px 0 10px 18px;
+  font-family: Georgia, serif;
+  font-size: 19px;
+}
+
+.lesson-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.task {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.task:last-child { border-bottom: 0; }
+
+.task input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--green);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.task-text { flex: 1; }
+
+.task-text strong { display: block; }
+
+.task-text small { color: var(--muted); }
+
+.task.done .task-text strong {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+textarea, input[type="text"] {
+  width: 100%;
+  border: 1px solid #d7dfd5;
+  background: #fcfdf9;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 13px 15px;
+}
+
+textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+label.field-label {
+  display: block;
+  font-weight: 700;
+  margin: 14px 0 6px;
+}
+
+.journal-entry {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 12px;
+  background: #fcfdf9;
+}
+
+.journal-entry p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.entry-date { font-size: 12px; color: var(--muted); }
+
+.breathing-wrap {
+  text-align: center;
+  padding: 24px 10px;
+}
+
+.breathing-circle {
+  width: 160px;
+  height: 160px;
+  margin: 20px auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c4dbc0, #709a7b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #203f2d;
+  font-size: 20px;
+  font-weight: 800;
+  box-shadow: 0 0 0 14px rgba(196, 219, 192, .25);
+  transition: transform 4s ease-in-out;
+}
+
+.breathing-circle.inhale { transform: scale(1.2); }
+.breathing-circle.exhale { transform: scale(.85); }
+
+footer {
+  text-align: center;
+  padding: 20px 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.notice {
+  background: #f8f1dd;
+  color: #68542a;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 13px;
+}
+
+[hidden] { display: none !important; }
+
+@media (min-width: 680px) {
+  .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .two-columns {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 18px;
+    align-items: start;
+  }
+}
+
+@media (max-width: 420px) {
+  main { width: min(100% - 22px, 900px); }
+  nav { gap: 6px; }
+  nav button { padding: 9px 11px; font-size: 13px; }
+  .button { width: 100%; }
+  .button-row { flex-direction: column; }
+  .breathing-circle { width: 140px; height: 140px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="brand">☘ Your personal wellness space</div>
+  <h1>Find Your Calm</h1>
+  <p>A little more peace, one small step at a time.</p>
+</header>
+
+<main>
+  <nav aria-label="Main navigation">
+    <button class="active" data-page="home" onclick="showPage('home')">Home</button>
+    <button data-page="learn" onclick="showPage('learn')">Learn</button>
+    <button data-page="breathe" onclick="showPage('breathe')">Breathe</button>
+    <button data-page="plan" onclick="showPage('plan')">7-Day Plan</button>
+    <button data-page="journal" onclick="showPage('journal')">My Journal</button>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home" class="page">
+    <div class="hero">
+      <div class="eyebrow">A fresh start begins here</div>
+      <h2>Make room for a calmer you.</h2>
+      <p>You don't have to figure everything out today.
+      Take a breath, be kind to yourself, and start with one small step.</p>
+      <div class="button-row">
+        <button class="button button-light" onclick="showPage('plan')">Start my journey →</button>
+        <button class="button button-outline" style="color:white;border-color:#8ba594" onclick="showPage('breathe')">Take a breath</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><strong id="daysStat">0/7</strong><span>Days completed</span></div>
+      <div class="stat"><strong id="percentStat">0%</strong><span>Weekly progress</span></div>
+      <div class="stat"><strong id="journalStat">0</strong><span>Journal entries</span></div>
+      <div class="stat"><strong>1</strong><span>Step at a time</span></div>
+    </div>
+
+    <div class="two-columns">
+      <div class="card">
+        <div class="eyebrow">Your journey</div>
+        <h3>Your weekly progress</h3>
+        <p class="muted">Every small action counts. Progress doesn't have to be perfect.</p>
+        <div class="progress-track" role="progressbar" aria-label="Weekly progress" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0" id="progressTrack">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+        <p id="progressText" class="small">You've completed 0 of 7 activities.</p>
+        <button class="button" onclick="showPage('plan')">View my plan</button>
+      </div>
+      <div class="card">
+        <div class="eyebrow">A thought for today</div>
+        <div class="quote" id="dailyQuote">You don't need to do everything today. Just take the next small step.</div>
+        <p class="small">Pause for a moment and let that thought settle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEARN -->
+  <section id="learn" class="page" hidden>
+    <div class="card">
+      <div class="eyebrow">Your simple wellness guide</div>
+      <h2>Small habits, meaningful changes.</h2>
+      <p class="muted">Explore these lessons at your own pace. Choose what feels manageable for you.</p>
+    </div>
+
+    <div class="card">
+      <div class="lesson-number">01</div>
+      <h3>Understand your stress</h3>
+      <p>Stress can affect your thoughts, body, sleep, and concentration. Notice what is troubling you without judging yourself.</p>
+      <p><strong>Try this:</strong> Write down one thing on your mind and one small action within your control.</p>
+    </div>
+
+    <div class="card">
+      <div class="lesson-number">02</div>
+      <h3>Give your mind a pause</h3>
+      <p>You don't have to respond to every thought immediately. A quiet moment can help you slow down and refocus.</p>
+      <p><strong>Try this:</strong> Put away your phone for two minutes and gently notice your surroundings.</p>
+      <button class="button button-outline" onclick="showPage('breathe')">Try breathing exercise</button>
+    </div>
+
+    <div class="card">
+      <div class="lesson-number">03</div>
+      <h3>Build a healthier sleep routine</h3>
+      <p>Try to keep regular sleeping and waking times. Make your room comfortable and reduce caffeine late in the day.</p>
+      <p><strong>Try this:</strong> Choose a simple, relaxing activity to do before bed.</p>
+    </div>
+
+    <div class="card">
+      <div class="lesson-number">04</div>
+      <h3>Look after your body</h3>
+      <p>Regular meals, water, daylight, and movement can support general well-being. Adapt activities to your needs and abilities.</p>
+      <p><strong>Try this:</strong> Stretch gently or take a short walk if you feel able.</p>
+    </div>
+
+    <div class="card">
+      <div class="lesson-number">05</div>
+      <h3>Make your day manageable</h3>
+      <p>A long task list can feel overwhelming. You can break a task into smaller steps and take breaks when needed.</p>
+      <p><strong>Try this:</strong> Pick one important task to focus on today.</p>
+    </div>
+
+    <div class="card">
+      <div class="lesson-number">06</div>
+      <h3>Stay connected</h3>
+      <p>Talking with someone you trust may help you feel supported. It's okay to ask for help or say no when you need to.</p>
+      <p><strong>Try this:</strong> Check in with a friend, relative, or another trusted person.</p>
+    </div>
+
+    <div class="card">
+      <div class="lesson-number">07</div>
+      <h3>Keep going gently</h3>
+      <p>Missing a day doesn't mean you have failed. Start again whenever you are ready and celebrate realistic progress.</p>
+      <p><strong>Try this:</strong> Choose one habit from this guide to continue next week.</p>
+    </div>
+
+    <div class="card">
+      <h3>When to seek extra support</h3>
+      <p>If stress, anxiety, low mood, or sleep difficulties persist, worsen, or interfere with daily life, consider speaking with a qualified healthcare professional.</p>
+    </div>
+  </section>
+
+  <!-- BREATHING -->
+  <section id="breathe" class="page" hidden>
+    <div class="card breathing-wrap">
+      <div class="eyebrow">Your moment of stillness</div>
+      <h2>Let's breathe together.</h2>
+      <p class="muted">Find a comfortable position. Breathe gently without forcing or holding your breath.</p>
+
+      <div class="breathing-circle" id="breathCircle" aria-live="polite">Ready?</div>
+      <h3 id="breathInstruction">Ready when you are</h3>
+      <p id="breathTimer" class="muted">Try one minute to begin.</p>
+
+      <div class="button-row" style="justify-content:center">
+        <button class="button" id="breathButton" onclick="toggleBreathing()">Start breathing</button>
+        <button class="button button-outline" onclick="stopBreathing()">Stop</button>
+      </div>
+      <p class="small">Breathe normally if this exercise feels uncomfortable. Stop if you feel dizzy or unwell.</p>
+    </div>
+
+    <div class="card">
+      <h3>A simple grounding exercise</h3>
+      <p>Gently notice the world around you:</p>
+      <ul>
+        <li>Notice five things you can see.</li>
+        <li>Notice four things you can feel.</li>
+        <li>Notice three things you can hear.</li>
+        <li>Notice two things you can smell.</li>
+        <li>Notice one thing you appreciate right now.</li>
+      </ul>
+      <p class="small">You can adapt this exercise to whatever feels comfortable.</p>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section id="plan" class="page" hidden>
+    <div class="card">
+      <div class="eyebrow">Your seven-day challenge</div>
+      <h2>Build your calm, one day at a time.</h2>
+      <p class="muted">Tick an activity when you've completed it. You can return to your plan whenever you want.</p>
+      <div class="progress-track">
+        <div class="progress-fill" id="planBar"></div>
+      </div>
+      <p id="planProgress" class="small">0 of 7 days completed</p>
+    </div>
+
+    <div class="card" id="tasks"></div>
+
+    <div class="card">
+      <h3>Remember</h3>
+      <p>These activities are suggestions, not a test. Adjust them to suit your circumstances. You can restart your checklist if you want a fresh week.</p>
+      <button class="button button-outline" onclick="resetTasks()">Reset checklist</button>
+    </div>
+  </section>
+
+  <!-- JOURNAL -->
+  <section id="journal" class="page" hidden>
+    <div class="card">
+      <div class="eyebrow">A space just for you</div>
+      <h2>Let your thoughts breathe.</h2>
+      <p class="muted">Write about your day, how you're feeling, or something you want to remember.</p>
+
+      <label class="field-label" for="journalTitle">Entry title (optional)</label>
+      <input type="text" id="journalTitle" maxlength="100" placeholder="A thought for today">
+
+      <label class="field-label" for="thoughts">What's on your mind?</label>
+      <textarea id="thoughts" maxlength="10000" placeholder="Start writing here..."></textarea>
+
+      <div class="button-row">
+        <button class="button" onclick="saveJournal()">Save entry</button>
+        <button class="button button-outline" onclick="clearEditor()">Clear editor</button>
+      </div>
+      <p id="savedMessage" class="small" role="status"></p>
+    </div>
+
+    <div class="card">
+      <h3>Your saved entries</h3>
+      <p class="muted small">Your entries are stored in this browser on this device.</p>
+      <div id="journalEntries"></div>
+    </div>
+
+    <div class="notice">
+      Privacy note: entries are not encrypted or password-protected. Anyone who can access your browser or device may be able to read them. Avoid passwords and highly sensitive personal information.
+    </div>
+  </section>
+
+  <footer>
+    Find Your Calm · Small steps matter.<br>
+    This app provides general wellness education, not diagnosis or medical treatment.
+  </footer>
+</main>
+
+<script>
+const days = [
+  {
+    title: "Notice what's on your mind",
+    detail: "Write down one thing causing stress and one small action you can take."
+  },
+  {
+    title: "Take a gentle pause",
+    detail: "Try one or two minutes of comfortable, unforced breathing."
+  },
+  {
+    title: "Move in a way that feels good",
+    detail: "Try a short walk or gentle movement if you're able."
+  },
+  {
+    title: "Create a sleep routine",
+    detail: "Choose a regular time to wind down for the evening."
+  },
+  {
+    title: "Connect with someone",
+    detail: "Send a kind message or talk with someone you trust."
+  },
+  {
+    title: "Make room for something enjoyable",
+    detail: "Spend a little time with a hobby or relaxing activity."
+  },
+  {
+    title: "Reflect and choose what to keep",
+    detail: "Notice what helped this week and choose one habit to continue."
+  }
+];
+
+const quotes = [
+  "You don't need to do everything today. Just take the next small step.",
+  "Rest is part of caring for yourself, not a reward you must earn.",
+  "Progress can be quiet, slow, and still meaningful.",
+  "You deserve the same patience you give to other people.",
+  "A difficult day does not define your whole journey.",
+  "You can begin again whenever you are ready.",
+  "Small, kind actions can add up over time."
+];
+
+function readStorage(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value === null ? fallback : JSON.parse(value);
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (error) {
+    alert("Your browser couldn't save this information. Check your browser storage settings.");
+    return false;
+  }
+}
+
+let completed = readStorage("calmTasks", []);
+if (!Array.isArray(completed)) completed = [];
+
+let journal = readStorage("calmJournalEntries", []);
+if (!Array.isArray(journal)) journal = [];
+
+let breathing = false;
+let breathTimeout = null;
+let breathStart = 0;
+let breathPhase = 0;
+
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.hidden = page.id !== id;
+  });
+
+  document.querySelectorAll("nav button").forEach(button => {
+    const active = button.dataset.page === id;
+    button.classList.toggle("active", active);
+    if (active) button.setAttribute("aria-current", "page");
+    else button.removeAttribute("aria-current");
+  });
+
+  if (id !== "breathe") stopBreathing();
+  if (id === "journal") renderJournal();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderTasks() {
+  const container = document.getElementById("tasks");
+  container.innerHTML = "";
+
+  days.forEach((day, i) => {
+    const label = document.createElement("label");
+    label.className = "task" + (completed.includes(i) ? " done" : "");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = completed.includes(i);
+    checkbox.setAttribute("aria-label", "Complete day " + (i + 1));
+
+    checkbox.addEventListener("change", () => {
+      const previous = [...completed];
+
+      if (checkbox.checked && !completed.includes(i)) {
+        completed.push(i);
+      } else {
+        completed = completed.filter(n => n !== i);
+      }
+
+      if (!writeStorage("calmTasks", completed)) {
+        completed = previous;
+      }
+
+      renderTasks();
+      updateProgress();
+    });
+
+    const text = document.createElement("span");
+    text.className = "task-text";
+
+    const title = document.createElement("strong");
+    title.textContent = "Day " + (i + 1) + ": " + day.title;
+
+    const detail = document.createElement("small");
+    detail.textContent = day.detail;
+
+    text.append(title, detail);
+    label.append(checkbox, text);
+    container.appendChild(label);
+  });
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const count = completed.length;
+  const percent = Math.round(count / days.length * 100);
+
+  document.getElementById("daysStat").textContent = count + "/7";
+  document.getElementById("percentStat").textContent = percent + "%";
+  document.getElementById("progressText").textContent =
+    "You've completed " + count + " of 7 activities.";
+  document.getElementById("progressBar").style.width = percent + "%";
+  document.getElementById("planBar").style.width = percent + "%";
+  document.getElementById("planProgress").textContent =
+    count + " of 7 days completed";
+  document.getElementById("progressTrack").setAttribute("aria-valuenow", count);
+}
+
+function resetTasks() {
+  if (!confirm("Would you like to reset your seven-day checklist?")) return;
+
+  const previous = [...completed];
+  completed = [];
+
+  if (!writeStorage("calmTasks", completed)) completed = previous;
+
+  renderTasks();
+}
+
+function toggleBreathing() {
+  if (breathing) return;
+
+  breathing = true;
+  breathStart = Date.now();
+  breathPhase = 0;
+
+  document.getElementById("breathButton").textContent = "Breathing...";
+  runBreathPhase();
+}
+
+function runBreathPhase() {
+  if (!breathing) return;
+
+  const elapsed = Math.floor((Date.now() - breathStart) / 1000);
+  const remaining = Math.max(0, 60 - elapsed);
+
+  document.getElementById("breathTimer").textContent =
+    remaining + " seconds remaining";
+
+  if (remaining <= 0) {
+    stopBreathing();
+    document.getElementById("breathInstruction").textContent =
+      "Well done. Take your time.";
+    document.getElementById("breathCircle").textContent = "Finished";
+    document.getElementById("breathTimer").textContent =
+      "Your one-minute session is complete.";
+    return;
+  }
+
+  const circle = document.getElementById("breathCircle");
+  const instruction = document.getElementById("breathInstruction");
+
+  if (breathPhase === 0) {
+    circle.className = "breathing-circle inhale";
+    circle.textContent = "Breathe in";
+    instruction.textContent = "Breathe in gently";
+    breathPhase = 1;
+    breathTimeout = setTimeout(runBreathPhase, 4000);
+  } else {
+    circle.className = "breathing-circle exhale";
+    circle.textContent = "Breathe out";
+    instruction.textContent = "Breathe out slowly";
+    breathPhase = 0;
+    breathTimeout = setTimeout(runBreathPhase, 6000);
+  }
+}
+
+function stopBreathing() {
+  breathing = false;
+  if (breathTimeout) clearTimeout(breathTimeout);
+  breathTimeout = null;
+
+  const circle = document.getElementById("breathCircle");
+  if (circle) circle.className = "breathing-circle";
+
+  const button = document.getElementById("breathButton");
+  if (button) button.textContent = "Start breathing";
+
+  if (document.getElementById("breathe") &&
+      !document.getElementById("breathe").hidden) {
+    document.getElementById("breathInstruction").textContent =
+      "Ready when you are";
+    document.getElementById("breathTimer").textContent =
+      "Try one minute to begin.";
+    if (circle) circle.textContent = "Ready?";
+  }
+}
+
+function clearEditor() {
+  document.getElementById("journalTitle").value = "";
+  document.getElementById("thoughts").value = "";
+  document.getElementById("savedMessage").textContent = "";
+}
+
+function saveJournal() {
+  const title = document.getElementById("journalTitle").value.trim();
+  const body = document.getElementById("thoughts").value.trim();
+
+  if (!body) {
+    document.getElementById("savedMessage").textContent =
+      "Write a little something before saving.";
+    return;
+  }
+
+  const entry = {
+    id: Date.now(),
+    title: title || "My journal entry",
+    body: body,
+    date: new Date().toLocaleString()
+  };
+
+  const previous = [...journal];
+  journal.unshift(entry);
+
+  if (!writeStorage("calmJournalEntries", journal)) {
+    journal = previous;
+    return;
+  }
+
+  clearEditor();
+  document.getElementById("savedMessage").textContent = "Your entry has been saved on this device.";
+  renderJournal();
+  updateJournalCount();
+}
+
+function renderJournal() {
+  const container = document.getElementById("journalEntries");
+  container.innerHTML = "";
+
+  if (journal.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "muted";
+    empty.textContent = "Your saved entries will appear here.";
+    container.appendChild(empty);
+    return;
+  }
+
+  journal.forEach(entry => {
+    const card = document.createElement("article");
+    card.className = "journal-entry";
+
+    const date = document.createElement("div");
+    date.className = "entry-date";
+    date.textContent = entry.date;
+
+    const title = document.createElement("h3");
+    title.textContent = entry.title;
+
+    const body = document.createElement("p");
+    body.textContent = entry.body;
+
+    const actions = document.createElement("div");
+    actions.className = "button-row";
+
+    const edit = document.createElement("button");
+    edit.className = "button button-outline";
+    edit.textContent = "Edit";
+    edit.addEventListener("click", () => {
+      document.getElementById("journalTitle").value = entry.title;
+      document.getElementById("thoughts").value = entry.body;
+      journal = journal.filter(item => item.id !== entry.id);
+      writeStorage("calmJournalEntries", journal);
+      renderJournal();
+      updateJournalCount();
+      document.getElementById("savedMessage").textContent =
+        "Entry loaded into the editor. Save it again when you're ready.";
+      document.getElementById("journalTitle").focus();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const remove = document.createElement("button");
+    remove.className = "button button-danger";
+    remove.textContent = "Delete";
+    remove.addEventListener("click", () => {
+      if (!confirm("Delete this journal entry?")) return;
+
+      const previous = [...journal];
+      journal = journal.filter(item => item.id !== entry.id);
+
+      if (!writeStorage("calmJournalEntries", journal)) {
+        journal = previous;
+      }
+
+      renderJournal();
+      updateJournalCount();
+    });
+
+    actions.append(edit, remove);
+    card.append(date, title, body, actions);
+    container.appendChild(card);
+  });
+}
+
+function updateJournalCount() {
+  document.getElementById("journalStat").textContent = journal.length;
+}
+
+document.getElementById("dailyQuote").textContent =
+  quotes[new Date().getDay()];
+
+renderTasks();
+renderJournal();
+updateJournalCount();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => {
+        console.log("Find Your Calm is ready for offline support!");
+      })
+      .catch((error) => {
+        console.error("Service worker registration failed:", error);
+      });
+  });
+}
+</script>
+</body>
+</html>

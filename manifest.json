@@ -1,0 +1,18 @@
+{
+"name": "Find Your Calm",
+"short_name": "Find Your Calm",
+"description": "A peaceful space for breathing, journaling, and daily wellbeing.",
+"start_url": "./index.html",
+"scope": "./",
+"display": "standalone",
+"background_color": "#f7f5ed",
+"theme_color": "#52796f",
+"icons": [
+{
+"src": "./icon.svg",
+"sizes": "any",
+"type": "image/svg+xml",
+"purpose": "any"
+}
+]
+}
